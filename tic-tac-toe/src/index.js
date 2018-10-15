@@ -30,6 +30,7 @@ class Board extends Component {
   constructor(props) {
     super(props);
     const currentSquare = this.props.squareToRender;
+    console.log(currentSquare);
     this.state = {
       squares: currentSquare,
       xIsNext: true,
@@ -38,33 +39,33 @@ class Board extends Component {
     this.handleClick = this.handleClick.bind(this); //this function is modifying the state
   }
 
-  // handleClick(event) {
-  //   //
-  //   const className = event.target.className;
-  //   const i = className.slice(className.indexOf("squareID-") + 9);
-  //   //
-  //   const squares = this.state.squares.slice();
-  //   /* determine if the square was already filled */
-  //   if (this.state.isGameOver) {
-  //     alert("Game over");
-  //   } else if (squares[i] === null) {
-  //     /* determine who is next */
-  //     squares[i] = this.state.xIsNext ? "X" : "O";
-  //     /* determine who is the winner if there is one */
-  //     const winner = determineWinner(squares);
+  handleClick(event) {
+    //
+    const className = event.target.className;
+    const i = className.slice(className.indexOf("squareID-") + 9);
+    //
+    const squares = this.state.squares.slice();
+    /* determine if the square was already filled */
+    if (this.state.isGameOver) {
+      alert("Game over");
+    } else if (squares[i] === null) {
+      /* determine who is next */
+      squares[i] = this.state.xIsNext ? "X" : "O";
+      /* determine who is the winner if there is one */
+      const winner = determineWinner(squares);
 
-  //     this.setState({
-  //       squares,
-  //       xIsNext: !this.state.xIsNext
-  //       isGameOver: Boolean(winner)
-  //     });
-  //   } else {
-  //     alert("this spot was filled already");
-  //   }
-  //   // console.log("state squares: " + this.state.squares);
-  //   console.log("current squares: " + squares);
-  //   // // console.log("GameOver?: " + Boolean());
-  // }
+      this.setState({
+        squares,
+        xIsNext: !this.state.xIsNext,
+        isGameOver: Boolean(winner)
+      });
+    } else {
+      alert("this spot was filled already");
+    }
+    // console.log("state squares: " + this.state.squares);
+    console.log("current squares: " + squares);
+    // // console.log("GameOver?: " + Boolean());
+  }
 
   renderSquare(i) {
     return (
@@ -137,7 +138,7 @@ class Game extends Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board value={squareToRender} />
+          <Board squareToRender={squareToRender} />
         </div>
         <div className="game-info">
           <div>history</div>
