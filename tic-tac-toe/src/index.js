@@ -2,17 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-function Square(props) {
-  return (
-    <button
-      className={"square squareID-" + props.squareId}
-      // onClick={this.props.onClick}
-    >
-      {props.value}
-    </button>
-  );
-}
-
 class Board extends Component {
   constructor(props) {
     super(props);
