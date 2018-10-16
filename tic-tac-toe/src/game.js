@@ -51,11 +51,6 @@ export default class Game extends Component {
       /* determine who is the winner if there is one */
       const winner = determineWinner(squares);
 
-      //   /* test */
-      //   console.log(squares[i]);
-      //   console.log(winner);
-      //   debugger;
-
       /* new history state */
       const newHistory = this.state.history.slice(0, this.state.stepNumber + 1);
       newHistory.push(squares);
