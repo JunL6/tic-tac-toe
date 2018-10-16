@@ -12,11 +12,11 @@ export default class Game extends Component {
         [null, null, null, null, null, "O", null, null, "X"]
       ],
       stepNumber: 2,
+      xIsNext: true,
       isGameOver: false
     };
 
     /* bind functions that mutate the state */
-    this.addSquare = this.addSquare.bind(this);
     this.handleClick = this.handleClick.bind(this); //this function is modifying the state
   }
 
@@ -33,23 +33,13 @@ export default class Game extends Component {
     });
   }
 
-  addSquare(newSquare) {
-    const newHistory = this.state.history.slice();
-    newHistory.push(newSquare);
-    // console.log("newSquare", newSquare);
-    // console.log("newHistory: ", newHistory);
-    // debugger;
-    this.setState({ history: newHistory });
-  }
-
   handleClick(event) {
-    //
+    /* get square id from className from event.target */
     const className = event.target.className;
     const i = className.slice(className.indexOf("squareID-") + 9);
-    //
+    /* get squares before click */
     const squares = this.state.history[this.state.stepNumber].slice();
-    console.log(squares);
-    debugger;
+
     /* determine if the square was already filled */
     if (this.state.isGameOver) {
       alert("Game over");
@@ -59,32 +49,34 @@ export default class Game extends Component {
       /* determine who is the winner if there is one */
       const winner = determineWinner(squares);
 
+      //   /* test */
+      //   console.log(squares[i]);
+      //   console.log(winner);
+      //   debugger;
+
+      /* new history state */
+      const newHistory = this.state.history.slice();
+      newHistory.push(squares);
+
       this.setState({
-        squares,
+        history: newHistory,
+        stepNumber: this.state.stepNumber + 1,
         xIsNext: !this.state.xIsNext,
         isGameOver: Boolean(winner)
       });
     } else {
       alert("this spot was filled already");
     }
-    // console.log("state squares: " + this.state.squares);
-    console.log("current squares: ", squares);
-    // // console.log("GameOver?: " + Boolean());
-    this.props.addSquare(squares);
   }
 
-  jumpBack() {}
+  jumpTo(stepNumber) {}
 
   render() {
     const squareToRender = this.state.history[this.state.history.length - 1];
     return (
       <div className="game">
         <div className="game-board">
-          <Board
-            squareToRender={squareToRender}
-            addSquare={this.addSquare}
-            onClick={this.handleClick}
-          />
+          <Board squareToRender={squareToRender} onClick={this.handleClick} />
         </div>
         <div className="game-info">
           <div>history</div>

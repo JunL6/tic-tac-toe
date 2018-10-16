@@ -13,7 +13,7 @@ export default class Board extends Component {
       <Square
         squareId={i}
         value={this.props.squareToRender[i]}
-        // onClick={this.handleClick}
+        onClick={this.props.onClick}
       />
     );
   }

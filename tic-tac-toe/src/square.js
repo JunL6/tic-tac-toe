@@ -4,7 +4,7 @@ export default function determineWinner(props) {
   return (
     <button
       className={"square squareID-" + props.squareId}
-      // onClick={this.props.onClick}
+      onClick={props.onClick}
     >
       {props.value}
     </button>
