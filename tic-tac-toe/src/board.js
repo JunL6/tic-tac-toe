@@ -19,7 +19,9 @@ export default class Board extends Component {
   }
 
   render() {
-    let status = "Next player: todo";
+    console.log(this.props.xIsNext);
+    const status = `Next player: ${this.props.xIsNext ? "X" : "O"}`;
+    // const status = "..oo..oo..oo..oo..oo..oo..";
 
     return (
       <div>

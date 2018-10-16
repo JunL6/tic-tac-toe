@@ -78,11 +78,16 @@ export default class Game extends Component {
   }
 
   render() {
-    const squareToRender = this.state.history[this.state.history.length - 1];
+    const squareToRender = this.state.history[this.state.stepNumber];
+    console.log("state stepNum:", this.state.stepNumber);
     return (
       <div className="game">
         <div className="game-board">
-          <Board squareToRender={squareToRender} onClick={this.handleClick} />
+          <Board
+            squareToRender={squareToRender}
+            onClick={this.handleClick}
+            xIsNext={this.state.xIsNext}
+          />
         </div>
         <div className="game-info">
           <div>history</div>
