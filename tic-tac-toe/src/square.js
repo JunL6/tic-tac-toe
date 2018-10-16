@@ -1,4 +1,6 @@
-function Square(props) {
+import React from "react";
+
+export default function determineWinner(props) {
   return (
     <button
       className={"square squareID-" + props.squareId}
