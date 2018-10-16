@@ -6,25 +6,27 @@ export default class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [
-        Array(9).fill(null),
-        [null, null, null, null, null, null, null, null, "X"],
-        [null, null, null, null, null, "O", null, null, "X"]
-      ],
-      stepNumber: 2,
+      history: [Array(9).fill(null)],
+      stepNumber: 0,
       xIsNext: true,
       isGameOver: false
     };
 
     /* bind functions that mutate the state */
-    this.handleClick = this.handleClick.bind(this); //this function is modifying the state
+    this.handleClick = this.handleClick.bind(this);
+    this.jumpTo = this.jumpTo.bind(this); //this function is modifying the state
   }
 
   renderHistory(historyArray) {
     return historyArray.map((value, index) => {
       return (
         <li key={index}>
-          <button>
+          <button
+            onClick={() => {
+              this.jumpTo(index);
+              console.log("jump to ", index);
+            }}
+          >
             Go to move #$
             {index}
           </button>
@@ -55,7 +57,7 @@ export default class Game extends Component {
       //   debugger;
 
       /* new history state */
-      const newHistory = this.state.history.slice();
+      const newHistory = this.state.history.slice(0, this.state.stepNumber + 1);
       newHistory.push(squares);
 
       this.setState({
@@ -69,7 +71,11 @@ export default class Game extends Component {
     }
   }
 
-  jumpTo(stepNumber) {}
+  jumpTo(stepNum) {
+    this.setState({ stepNumber: stepNum }, () => {
+      console.log("stepNum: ", this.state.stepNumber);
+    });
+  }
 
   render() {
     const squareToRender = this.state.history[this.state.history.length - 1];
