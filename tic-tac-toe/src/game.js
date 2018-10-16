@@ -93,6 +93,11 @@ export default class Game extends Component {
           <div>history</div>
           <ol>{this.renderHistory(this.state.history)}</ol>
         </div>
+        <div className="winnerDeclarer">
+          {this.state.isGameOver
+            ? "Game Over! Winner: " + determineWinner(squareToRender)
+            : ""}
+        </div>
       </div>
     );
   }
